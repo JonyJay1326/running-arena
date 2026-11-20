@@ -104,14 +104,14 @@ def main():
     # 原始字符串仍保留在 results/standings.json 与 docs/models.md 里。
     EP3_MODEL = {
         "sol": "Codex CLI · GPT-6.2 Sol · High",
-        "fable": "Claude Code · Claude Fable 5.2 · High",
+        "fable": "Claude Code · Fable 5.2 · High",
         "carbon": "OpenCode · Gemini 4 Carbon · High",
         "hydrogen": "OpenCode · Gemini 4 Hydrogen · High",
         "astra": "Codex · GPT-6 Astra · High",
-        "opus": "Claude Code · Claude Opus 5.5 · High",
+        "opus": "Claude Code · Opus 5.5 · High",
         "terra": "Codex · GPT-6.1 Terra · High",
         "grok": "Grok CLI · Grok 4.7 Fast · High",
-        "sonnet": "Claude Code · Claude Sonnet 5.5 · High",
+        "sonnet": "Claude Code · Sonnet 5.5 · High",
         "glm": "ZCode · GLM-5.3 · High",
         "qwen": "Qoder CLI · Qwen4-Max-Preview · High",
         "kimi": "OpenCode · Kimi K3.1 Pro · High",
@@ -475,4 +475,5 @@ node verify.mjs --player sol --round 1</pre>
 
 if __name__ == "__main__":
     main()
+
 
