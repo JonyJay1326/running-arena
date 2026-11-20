@@ -1,0 +1,5 @@
+{
+  "id": "practice-tokens", "map": "flat", "tee": { "x0": 180, "x1": 460 },
+  "wind": 4, "par": 3, "cap": 7, "goal": "tokens", "recycle": null, "fly": 1,
+  "objects": [{ "type": "token", "x": 660, "y": 780 }, { "type": "bigToken", "x": 910, "y": 780 }]
+}

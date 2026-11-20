@@ -1,0 +1,86 @@
+{
+ "id": "c2-03",
+ "map": "kimi",
+ "par": 3,
+ "cap": 7,
+ "wind": -2,
+ "goal": "bug",
+ "tee": {
+  "x0": 290,
+  "x1": 330
+ },
+ "objects": [
+  {
+   "type": "bug",
+   "x": 560,
+   "y": 820
+  },
+  {
+   "type": "chicken",
+   "x": 1062,
+   "y": 820
+  }
+ ],
+ "recycle": {
+  "x0": 975,
+  "y0": 780,
+  "x1": 1035,
+  "y1": 830
+ },
+ "fly": 0,
+ "name": "月下推虫",
+ "idea": "碗底中间鼓起一个约 50px 高的土包，回收站就在土包后面，尖叫鸡紧贴回收站另一侧。稳妥：一下下小力推，推上土包再推过去（3～4 杆）；巧妙：先用掘进弹把土包挖平再推（2 杆）；冒险：炸在 Bug 后方合适距离让它一跃飞过土包直接落进回收站（1 杆，所有单发瞄法里只有约 0.02% 能做到，力度大一点就砸到鸡）。",
+ "terrain": [
+  {
+   "op": "fill",
+   "circle": [
+    820,
+    872,
+    105
+   ],
+   "note": "碗底土包（约 50px 高）"
+  }
+ ],
+ "routes": [
+  {
+   "name": "单发推（全知选手可一杆飞进）",
+   "kind": "safe",
+   "steps": [
+    {
+     "kind": "single",
+     "greedy": true
+    }
+   ],
+   "then": "single"
+  },
+  {
+   "name": "先挖平土包再推",
+   "kind": "clever",
+   "steps": [
+    {
+     "kind": "dig",
+     "aimAt": [
+      820,
+      792
+     ]
+    },
+    {
+     "kind": "single",
+     "greedy": true
+    }
+   ],
+   "then": "single"
+  },
+  {
+   "name": "三连发一口气推",
+   "kind": "risky",
+   "steps": [
+    {
+     "kind": "burst",
+     "greedy": true
+    }
+   ],
+   "then": "single"
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+  "qualification": {
+    "Astra": {
+      "bot": "bots/Astra/bot.py",
+      "sha256": "fb40f78447c11711d35aee60ca2741ebbc85a0d986b2c51313f7c9deacc04007"
+    },
+    "DeepSeek": {
+      "bot": "bots/DeepSeek/bot.py",
+      "sha256": "cd874ac325e38e7ce2a5aaec6085ce08d2e6833a198997e2b08f769378ed5b7c"
+    },
+    "Doubao": {
+      "bot": "bots/Doubao/bot.py",
+      "sha256": "c2514b4843f6e0b8615e2416d940ebea6dc78ae2a3fb0f8c0c7fbc5cf013bad7"
+    },
+    "GLM": {
+      "bot": "bots/GLM/bot.py",
+      "sha256": "9181d02f249581230a7f68da6faacf6896ff84808d1745f79286adac0919a24d"
+    },
+    "Gemini": {
+      "bot": "bots/Gemini/bot.py",
+      "sha256": "a3b073e69e54c537f5a616cbad38be1c1cb2dbc627be25e456e63363c13c0822"
+    },
+    "Grok": {
+      "bot": "bots/Grok/bot.py",
+      "sha256": "342d735b5c3fc48c3274a746bf3a2c639f94150120e640ae67fe1467676d143f"
+    },
+    "Hy4": {
+      "bot": "bots/Hy4/bot.py",
+      "sha256": "2b0fb966b69c2f006c03cd37bac097e5666fa054cb4db9f9ba1de206abf1c8a7"
+    },
+    "Kimi": {
+      "bot": "bots/Kimi/bot.py",
+      "sha256": "943b33620b12f86ab6ee7f7f9bc84599d9c20caf809149ff6b7fe0e8f30021b9"
+    },
+    "MiMo": {
+      "bot": "bots/MiMo/bot.py",
+      "sha256": "61be109f8fd99585584394f62cfde5f1f63be3cf7999535075240381b3cf7503"
+    },
+    "MiniMax": {
+      "bot": "bots/MiniMax/bot.py",
+      "sha256": "507449a2d13562c91185e50def7c654f202c957d0c315816f2852ea6f2c40874"
+    },
+    "Opus": {
+      "bot": "bots/Opus/bot.py",
+      "sha256": "d0e2a672ceb3d913e79a5b285a21b803fb3214185d9976acc9d63c9088907723"
+    },
+    "Qwen": {
+      "bot": "bots/Qwen/bot.py",
+      "sha256": "e863a4d6864833d26c3bd654811771994846b6550879f44fa12f94c59e722caa"
+    },
+    "Sol": {
+      "bot": "bots/Sol/bot.py",
+      "sha256": "059f14a1528cbbd89e5083c7dc74babb58acd80db5cc4e48a9c870e0bc15bef3"
+    },
+    "Sonnet": {
+      "bot": "bots/Sonnet/bot.py",
+      "sha256": "9f805af17e9baa1a114066a12d43ee3a8a0ab214b70c942d07b218801f0a43ab"
+    },
+    "Step": {
+      "bot": "bots/Step/bot.py",
+      "sha256": "2b1f1e33f20ab6e821994260ef98e4a7bbe346a85e81c8c01e9ac7420bb38964"
+    },
+    "Terra": {
+      "bot": "bots/Terra/bot.py",
+      "sha256": "947207911dc34723b7920b9fbfc4ff2878fc17bc3c0e59844f0048bfa4be15ad"
+    }
+  },
+  "final": {
+    "Astra": {
+      "bot": "bots-final/Astra/bot.py",
+      "sha256": "bb22f09c7b4f570a8fb043eea599f3ba5094407d9043522e2b34570f7ccff039"
+    },
+    "GLM": {
+      "bot": "bots-final/GLM/bot.py",
+      "sha256": "cce4827a235357f61ee3bb6c025cf0ecf6ef57314310ff451ba01d26e7af3bf6"
+    },
+    "Grok": {
+      "bot": "bots-final/Grok/bot.py",
+      "sha256": "2b4b284cb0ac71a668589847d5cae82399a747a8d86dfa8dc57c16eb8ae2ca8e"
+    },
+    "Hy4": {
+      "bot": "bots-final/Hy4/bot.py",
+      "sha256": "ea26a5ff0d465301bdea02d100dcf93f98306ae16cbfe5837b43d34d1c06e1d8"
+    },
+    "Opus": {
+      "bot": "bots-final/Opus/bot.py",
+      "sha256": "241670ead8bf3b4003d648a92d635ab02d4c188a86ec5ee8351ccdc9cd2a7123"
+    },
+    "Sol": {
+      "bot": "bots-final/Sol/bot.py",
+      "sha256": "be679235798ccab1916b7c663b471925eb8cfe977c58dc2552f73f49ef6c0320"
+    },
+    "Sonnet": {
+      "bot": "bots-final/Sonnet/bot.py",
+      "sha256": "56e195e4229cad20775662f76a44f36442f36f0fcf07cc4cd2d75107e99e474e"
+    },
+    "Terra": {
+      "bot": "bots-final/Terra/bot.py",
+      "sha256": "178b7a9f0b40145a3cf58a39cbb4cad429c5f43afedef4bc04d32f56fd732cae"
+    }
+  }
+}

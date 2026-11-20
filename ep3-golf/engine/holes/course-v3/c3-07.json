@@ -1,0 +1,117 @@
+{
+  "id": "c3-07",
+  "map": "deepseek",
+  "par": 3,
+  "cap": 7,
+  "wind": -2,
+  "goal": "tokens",
+  "tee": {
+    "x0": 220,
+    "x1": 260
+  },
+  "objects": [
+    {
+      "type": "gate",
+      "x": 905,
+      "y": 760,
+      "height": 140
+    },
+    {
+      "type": "switch",
+      "x": 600,
+      "y": 692,
+      "opens": 0
+    },
+    {
+      "type": "token",
+      "x": 1060,
+      "y": 768
+    }
+  ],
+  "recycle": null,
+  "fly": 1,
+  "name": "鲸腹两扇门",
+  "idea": "鲸腹红门挡住正路，目标头顶另开直井。先开关后穿门，连发一边开门一边进，或纸飞机上鲸背从直井投递。",
+  "routes": [
+    {
+      "name": "开关后走正门",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "single",
+          "dir": 1,
+          "moveX": 240,
+          "aimAt": [
+            600,
+            678
+          ]
+        },
+        {
+          "kind": "single",
+          "dir": 1,
+          "moveX": 240,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "连发同步开门",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 240,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    },
+    {
+      "name": "飞机越鲸背",
+      "kind": "risky",
+      "steps": [
+        {
+          "kind": "fly",
+          "moveX": 260,
+          "dir": 1,
+          "aimAt": [
+            470,
+            150
+          ]
+        },
+        {
+          "kind": "single",
+          "dir": 1,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    }
+  ],
+  "terrain": [
+    {
+      "op": "fill",
+      "rect": [
+        590,
+        692,
+        610,
+        790
+      ],
+      "note": "海面上的细柱子，顶上放开关"
+    },
+    {
+      "op": "carve",
+      "rect": [
+        1016,
+        0,
+        1120,
+        780
+      ]
+    }
+  ]
+}

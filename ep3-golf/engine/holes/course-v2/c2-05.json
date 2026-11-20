@@ -1,0 +1,87 @@
+{
+ "id": "c2-05",
+ "map": "claude",
+ "par": 3,
+ "cap": 7,
+ "wind": 3,
+ "goal": "tokens",
+ "tee": {
+  "x0": 130,
+  "x1": 180
+ },
+ "objects": [
+  {
+   "type": "token",
+   "x": 630,
+   "y": 108
+  },
+  {
+   "type": "token",
+   "x": 867,
+   "y": 144
+  },
+  {
+   "type": "pushToken",
+   "x": 1074,
+   "y": 232
+  }
+ ],
+ "recycle": null,
+ "fly": 0,
+ "name": "一石三鸟",
+ "idea": "三根光芒顶上各一颗，右边那颗是滑板 token（150 血）。三叉散射一发能打碎左边两颗，但滑板 token 只掉血、被炸飞：飞远了掉出地图算碎，飞近了落在右横梁上，倒霉的话从缺口掉进下层夹缝，只能贴着横梁底下平射补刀。也可以先轻炸把它推下光芒，再一发三叉收另外两颗。",
+ "terrain": [
+  {
+   "op": "carve",
+   "rect": [
+    1150,
+    430,
+    1230,
+    490
+   ],
+   "note": "右横梁上的缺口：滑板 token 掉进去会卡在下层夹缝里"
+  }
+ ],
+ "routes": [
+  {
+   "name": "三发单发逐个打",
+   "kind": "safe",
+   "steps": [
+    {
+     "kind": "single",
+     "greedy": true
+    }
+   ],
+   "then": "single"
+  },
+  {
+   "name": "先推滑板 token 出界，再三叉",
+   "kind": "clever",
+   "steps": [
+    {
+     "kind": "single",
+     "aimAt": [
+      1050,
+      222
+     ]
+    },
+    {
+     "kind": "spread",
+     "greedy": true
+    }
+   ],
+   "then": "single"
+  },
+  {
+   "name": "直接三叉碰运气",
+   "kind": "risky",
+   "steps": [
+    {
+     "kind": "spread",
+     "greedy": true
+    }
+   ],
+   "then": "single"
+  }
+ ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "c3-01",
+  "map": "gemini",
+  "par": 2,
+  "cap": 6,
+  "wind": 3,
+  "goal": "tokens",
+  "tee": {
+    "x0": 360,
+    "x1": 440
+  },
+  "objects": [
+    {
+      "type": "token",
+      "x": 850,
+      "y": 840
+    },
+    {
+      "type": "token",
+      "x": 1020,
+      "y": 840
+    }
+  ],
+  "recycle": null,
+  "fly": 0,
+  "name": "开球·一分为二",
+  "idea": "两颗亮靶，一眼看懂。逐颗单发保底；走到台边改变两靶张角，用散射同时收走。全场仅此洞以三叉覆盖为主解。",
+  "routes": [
+    {
+      "name": "两发单发",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "single",
+          "greedy": true,
+          "moveX": 400
+        },
+        {
+          "kind": "single",
+          "greedy": true,
+          "moveX": 400,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "走到台边一发三叉",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "spread",
+          "greedy": true,
+          "moveX": 430,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+ "id": "c1-02",
+ "map": "openai",
+ "par": 3,
+ "cap": 7,
+ "wind": 5,
+ "goal": "tokens",
+ "tee": {
+  "x0": 300,
+  "x1": 360
+ },
+ "objects": [
+  {
+   "type": "token",
+   "x": 1312,
+   "y": 300
+  }
+ ],
+ "recycle": null,
+ "fly": 0,
+ "name": "解结",
+ "idea": "token 被封在右边花结的环里。先用掘进弹炸开上面那条环，再把炮弹送进去。"
+}

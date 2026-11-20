@@ -1,0 +1,78 @@
+{
+ "id": "c2-07",
+ "map": "deepseek",
+ "par": 2,
+ "cap": 6,
+ "wind": -2,
+ "goal": "tokens",
+ "tee": {
+  "x0": 220,
+  "x1": 260
+ },
+ "objects": [
+  {
+   "type": "gate",
+   "x": 905,
+   "y": 760,
+   "height": 140
+  },
+  {
+   "type": "switch",
+   "x": 600,
+   "y": 692,
+   "opens": 0
+  },
+  {
+   "type": "token",
+   "x": 1060,
+   "y": 768
+  }
+ ],
+ "recycle": null,
+ "fly": 0,
+ "name": "鲸腹机关",
+ "idea": "鲸鱼肚子底下贴着海面的通道被一扇打不坏的门堵住；开关立在海面一根细柱子顶上，正好在通往 token 的低平弹道上。单发：第一发打碎开关（门开），第二发沿同一弹道穿门（2 杆）。三连发：第一颗打碎开关、门当场消失，后两颗沿同一弹道直接穿过去（1 杆）。鲸鱼下巴挡住了所有高抛。",
+ "routes": [
+  {
+   "name": "先打开关，再穿门",
+   "kind": "safe",
+   "steps": [
+    {
+     "kind": "single",
+     "aimAt": [
+      600,
+      678
+     ]
+    },
+    {
+     "kind": "single",
+     "greedy": true
+    }
+   ],
+   "then": "single"
+  },
+  {
+   "name": "三连发：开门+穿门",
+   "kind": "clever",
+   "steps": [
+    {
+     "kind": "burst",
+     "greedy": true
+    }
+   ],
+   "then": "burst"
+  }
+ ],
+ "terrain": [
+  {
+   "op": "fill",
+   "rect": [
+    590,
+    692,
+    610,
+    790
+   ],
+   "note": "海面上的细柱子，顶上放开关"
+  }
+ ]
+}

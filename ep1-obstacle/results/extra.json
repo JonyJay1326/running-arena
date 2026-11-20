@@ -1,0 +1,23 @@
+{
+  "note": "榜外补测：同一份任务书、同一引擎、同样 45 分钟，但在正式赛之后补跑，不计名次与赛季积分。",
+  "results": [
+    {
+      "name": "Astra 6.2",
+      "model": "gpt-6.2-astra",
+      "effort": "high",
+      "bot": "extra/astra-6-2/bot.py",
+      "sha256": "0da56c6dbf9fa4083981b7d4bfac94c47af3e3a99f5d15524d65566e11efc3cb",
+      "finish_s": 6.916667,
+      "score_m": 19.067
+    },
+    {
+      "name": "Fable 5.2",
+      "model": "claude-fable-5-2",
+      "effort": "medium",
+      "bot": "extra/fable-5-2/bot.py",
+      "sha256": "8b98a3d4f5d772fd6b426eaa58e0b71a082e3e0a8e6ed518f35e8325caa00dcd",
+      "finish_s": 8.433333,
+      "score_m": 19.299
+    }
+  ]
+}

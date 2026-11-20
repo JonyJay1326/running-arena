@@ -1,0 +1,135 @@
+{
+  "id": "c4-09",
+  "map": "dragon-golf",
+  "par": 4,
+  "cap": 8,
+  "wind": 3,
+  "goal": "tokens",
+  "tee": {
+    "x0": 70,
+    "x1": 110
+  },
+  "objects": [
+    {
+      "type": "bigToken",
+      "x": 700,
+      "y": 284,
+      "hp": 200
+    },
+    {
+      "type": "bigToken",
+      "x": 732,
+      "y": 400,
+      "hp": 180
+    },
+    {
+      "type": "chicken",
+      "x": 820,
+      "y": 260
+    }
+  ],
+  "recycle": null,
+  "fly": 0,
+  "name": "双珠归一",
+  "idea": "两颗耐久龙珠上下分隔。逐颗打要反复换目标；先拆上珠底座，让两珠在下层会合，再一次爆炸同时伤害两珠。第一杆不求伤害，而是改变目标布局。",
+  "terrain": [
+    {
+      "op": "carve",
+      "rect": [
+        600,
+        100,
+        800,
+        400
+      ]
+    },
+    {
+      "op": "fill",
+      "rect": [
+        664,
+        284,
+        732,
+        308
+      ]
+    },
+    {
+      "op": "fill",
+      "rect": [
+        600,
+        400,
+        800,
+        900
+      ]
+    },
+    {
+      "op": "fill",
+      "rect": [
+        804,
+        260,
+        844,
+        284
+      ]
+    },
+    {
+      "op": "carve",
+      "rect": [
+        804,
+        224,
+        836,
+        260
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "name": "逐珠削血",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "single",
+          "dir": 1,
+          "moveX": 90,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "先合珠再双杀",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "dig",
+          "dir": 1,
+          "moveX": 90,
+          "aimAt": [
+            692,
+            302
+          ]
+        },
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 90,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    },
+    {
+      "name": "连发逐珠清理",
+      "kind": "risky",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 110,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "note": "榜外补测：同一引擎、同一跳远规则；在正式赛之后补跑，不计名次与赛季积分。",
+  "results": [
+    {
+      "name": "Astra 6.2",
+      "model": "gpt-6.2-astra",
+      "effort": "high",
+      "bot": "extra/astra-6-2/bot.py",
+      "sha256": "da9b760d358c3b965005022ec05cecd915ed157f2d3215d06fcbfdbe11677231",
+      "best": 6.2557,
+      "attempts": [
+        {
+          "attempt": 1,
+          "score": 5.5678,
+          "wind_seed": 1880670287446797536,
+          "wind_strength": 1.5,
+          "match_ctx": {
+            "round": 1,
+            "best_so_far": 0.0,
+            "leader": 0.0,
+            "rank": 0,
+            "qualification_line": 0.0,
+            "bronze_line": 0.0
+          },
+          "start_x": 9.0,
+          "foul": null
+        },
+        {
+          "attempt": 2,
+          "score": 6.2557,
+          "wind_seed": 1021930853335095885,
+          "wind_strength": 1.5,
+          "match_ctx": {
+            "round": 2,
+            "best_so_far": 5.567765675797013,
+            "leader": 5.598982195174656,
+            "rank": 2,
+            "qualification_line": 0.0,
+            "bronze_line": 4.889858048106646
+          },
+          "start_x": 9.0,
+          "foul": null
+        },
+        {
+          "attempt": 3,
+          "score": 5.597,
+          "wind_seed": 895931283590806084,
+          "wind_strength": 1.5,
+          "match_ctx": {
+            "round": 3,
+            "best_so_far": 6.255660198401653,
+            "leader": 6.255660198401653,
+            "rank": 1,
+            "qualification_line": 0.0,
+            "bronze_line": 5.20820422737928
+          },
+          "start_x": 9.0,
+          "foul": null
+        }
+      ]
+    },
+    {
+      "name": "Fable 5.2",
+      "model": "claude-fable-5-2",
+      "effort": "medium",
+      "bot": "extra/fable-5-2/bot.py",
+      "sha256": "983794fa2efc55467c559d6b9fdb4aa82ccacfc30c7278ef0383827e3f45b7fe",
+      "best": 6.4565,
+      "attempts": [
+        {
+          "attempt": 1,
+          "score": 6.4229,
+          "wind_seed": 1880670287446797536,
+          "wind_strength": 1.5,
+          "match_ctx": {
+            "round": 1,
+            "best_so_far": 0.0,
+            "leader": 0.0,
+            "rank": 0,
+            "qualification_line": 0.0,
+            "bronze_line": 0.0
+          },
+          "start_x": 3.0,
+          "foul": null
+        },
+        {
+          "attempt": 2,
+          "score": 6.4565,
+          "wind_seed": 1021930853335095885,
+          "wind_strength": 1.5,
+          "match_ctx": {
+            "round": 2,
+            "best_so_far": 6.422868162319652,
+            "leader": 6.422868162319652,
+            "rank": 1,
+            "qualification_line": 0.0,
+            "bronze_line": 4.889858048106646
+          },
+          "start_x": 3.0,
+          "foul": null
+        },
+        {
+          "attempt": 3,
+          "score": 5.1815,
+          "wind_seed": 895931283590806084,
+          "wind_strength": 1.5,
+          "match_ctx": {
+            "round": 3,
+            "best_so_far": 6.456548477854703,
+            "leader": 6.456548477854703,
+            "rank": 1,
+            "qualification_line": 0.0,
+            "bronze_line": 5.20820422737928
+          },
+          "start_x": 3.0,
+          "foul": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+ "id": "c1-05",
+ "map": "claude",
+ "par": 3,
+ "cap": 7,
+ "wind": 3,
+ "goal": "tokens",
+ "tee": {
+  "x0": 130,
+  "x1": 180
+ },
+ "objects": [
+  {
+   "type": "token",
+   "x": 630,
+   "y": 108
+  },
+  {
+   "type": "token",
+   "x": 867,
+   "y": 144
+  },
+  {
+   "type": "token",
+   "x": 1074,
+   "y": 232
+  }
+ ],
+ "recycle": null,
+ "fly": 0,
+ "name": "一石三鸟",
+ "idea": "三根光芒顶上各一颗 token。三叉散射一发全中，单发要三杆。"
+}

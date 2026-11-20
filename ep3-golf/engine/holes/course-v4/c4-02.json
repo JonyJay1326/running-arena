@@ -1,0 +1,132 @@
+{
+  "id": "c4-02",
+  "map": "openai",
+  "par": 3,
+  "cap": 7,
+  "wind": 2,
+  "goal": "tokens",
+  "tee": {
+    "x0": 750,
+    "x1": 850,
+    "minFeet": 500
+  },
+  "objects": [
+    {
+      "type": "bigToken",
+      "x": 1220,
+      "y": 560,
+      "hp": 360
+    },
+    {
+      "type": "chicken",
+      "x": 1300,
+      "y": 480
+    }
+  ],
+  "recycle": null,
+  "fly": 0,
+  "name": "礼盒抽屉",
+  "idea": "鸡守礼盒顶部。正面磨血看似直接；掘进弹打盒底，让耐久靶穿过竖井掉出底边，鸡留在独立台阶。伤害不是唯一进度。",
+  "routes": [
+    {
+      "name": "正面逐发拆盒",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "single",
+          "dir": 1,
+          "moveX": 800,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "抽掉盒底而非打靶",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "dig",
+          "dir": 1,
+          "moveX": 800,
+          "aimAt": [
+            1216,
+            576
+          ]
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "连发边拆边打",
+      "kind": "risky",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 800,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    }
+  ],
+  "terrain": [
+    {
+      "op": "fill",
+      "rect": [
+        728,
+        560,
+        872,
+        592
+      ]
+    },
+    {
+      "op": "carve",
+      "rect": [
+        880,
+        470,
+        1280,
+        560
+      ]
+    },
+    {
+      "op": "carve",
+      "rect": [
+        1160,
+        560,
+        1272,
+        900
+      ]
+    },
+    {
+      "op": "fill",
+      "rect": [
+        1176,
+        560,
+        1260,
+        588
+      ]
+    },
+    {
+      "op": "fill",
+      "rect": [
+        1280,
+        480,
+        1332,
+        500
+      ]
+    },
+    {
+      "op": "carve",
+      "rect": [
+        1284,
+        444,
+        1316,
+        480
+      ]
+    }
+  ]
+}

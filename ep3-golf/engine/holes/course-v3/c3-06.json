@@ -1,0 +1,147 @@
+{
+  "id": "c3-06",
+  "map": "doubao",
+  "par": 4,
+  "cap": 8,
+  "wind": 2,
+  "goal": "tokens",
+  "tee": {
+    "x0": 380,
+    "x1": 420,
+    "minFeet": 700
+  },
+  "objects": [
+    {
+      "type": "bigToken",
+      "x": 1200,
+      "y": 760,
+      "hp": 180
+    },
+    {
+      "type": "chicken",
+      "x": 1265,
+      "y": 760
+    }
+  ],
+  "recycle": null,
+  "fly": 1,
+  "name": "双屋快递",
+  "idea": "包裹在右屋，鸡站旁边。地面拆两墙稳扎稳打；连发先开墙后送货；纸飞机飞上屋顶，从直烟囱投递。",
+  "terrain": [
+    {
+      "op": "carve",
+      "rect": [
+        600,
+        650,
+        614,
+        760
+      ]
+    },
+    {
+      "op": "carve",
+      "rect": [
+        1008,
+        650,
+        1024,
+        760
+      ]
+    },
+    {
+      "op": "carve",
+      "rect": [
+        370,
+        220,
+        470,
+        620
+      ]
+    },
+    {
+      "op": "carve",
+      "rect": [
+        1040,
+        220,
+        1260,
+        620
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "name": "两墙分拆再投递",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "dig",
+          "dir": 1,
+          "moveX": 400,
+          "aimAt": [
+            596,
+            725
+          ]
+        },
+        {
+          "kind": "dig",
+          "dir": 1,
+          "moveX": 400,
+          "aimAt": [
+            1004,
+            725
+          ]
+        },
+        {
+          "kind": "single",
+          "moveX": 400,
+          "dir": 1,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "连发穿两墙",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 400,
+          "aimAt": [
+            1179,
+            732
+          ]
+        },
+        {
+          "kind": "single",
+          "moveX": 400,
+          "dir": 1,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "飞上屋顶投递",
+      "kind": "risky",
+      "steps": [
+        {
+          "kind": "fly",
+          "moveX": 400,
+          "dir": 1,
+          "aimAt": [
+            510,
+            324
+          ]
+        },
+        {
+          "kind": "burst",
+          "dir": 1,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    }
+  ]
+}

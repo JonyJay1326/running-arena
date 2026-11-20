@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>第 2 期 · 跳远 · 回放</title>
+<style>
+  :root { --bg:#0b0f16; --fg:#e8eef7; --dim:#7b8aa0; --gold:#ffcf4a; --line:#1e2a3a; --sand:#5b4a2f; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.5 "Microsoft YaHei",system-ui,sans-serif; }
+  header { display:flex; align-items:center; gap:16px; padding:12px 18px; border-bottom:1px solid var(--line); }
+  h1 { font-size:16px; margin:0; letter-spacing:.5px; }
+  h1 small { color:var(--dim); font-weight:400; margin-left:8px; }
+  select, button, input[type=range] { font:inherit; background:#131c28; color:var(--fg);
+    border:1px solid var(--line); border-radius:6px; padding:4px 8px; }
+  button { cursor:pointer; }
+  .spacer { flex:1; }
+  #stage { position:relative; }
+  canvas { display:block; width:100%; height:min(52vh,470px); }
+  .hud { position:absolute; top:14px; left:18px; font-variant-numeric:tabular-nums; }
+  .hud b { font-size:28px; color:var(--gold); }
+  .hud span { color:var(--dim); margin-left:6px; }
+  .bar { display:flex; align-items:center; gap:10px; padding:10px 18px; border-top:1px solid var(--line); }
+  .bar input[type=range] { flex:1; }
+  #drop { padding:10px 18px; color:var(--dim); font-size:12px; }
+  #drop.over { color:var(--gold); }
+  .badge { padding:2px 8px; border:1px solid var(--line); border-radius:999px; color:var(--dim); font-size:12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AI 运动会 · 第 2 期 跳远<small>回放（简化渲染，成绩以 results/leaderboard.json 为准）</small></h1>
+  <div class="spacer"></div>
+  <select id="pick"><option value="">选择选手…</option></select>
+  <span class="badge" id="meta">-</span>
+</header>
+
+<div id="stage">
+  <canvas id="cv"></canvas>
+  <div class="hud"><b id="dist">0.00</b><span>m</span> <span id="best"></span></div>
+</div>
+
+<div class="bar">
+  <button id="play">▶ 播放</button>
+  <input id="seek" type="range" min="0" max="0" value="0" step="1">
+  <span id="t" style="color:var(--dim);min-width:64px;text-align:right">0.00 s</span>
+  <select id="speed">
+    <option value="0.25">0.25×</option>
+    <option value="0.5">0.5×</option>
+    <option value="1" selected>1×</option>
+    <option value="2">2×</option>
+  </select>
+</div>
+<div id="drop">把 <code>python replays/trace.py &lt;选手&gt;</code> 导出的 JSON 拖进来，或用
+  <code>python -m http.server</code> 起本地服务后从右上角选（file:// 下浏览器不允许读 index.json）。</div>
+
+<script>
+const LINE = 12.0, PIT_END = 27.0, PIT_DEPTH = 3.0, START_X = 9.0;
+let S = {                                  // 缺省身体尺寸（trace 里会带真实值）
+  torso:[0.20,0.60], headR:0.11, thigh:[0.12,0.45], shin:[0.10,0.45],
+  foot:[0.32,0.06], arm:[0.10,0.35], fore:[0.08,0.45]
+};
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+let PXM = 110, GROUND_PX = 150;
+let trace=null, idx=0, playing=false, speed=1, last=0, camX=8;
+
+function resize(){
+  const r = cv.getBoundingClientRect(), dpr = devicePixelRatio||1;
+  cv.width = r.width*dpr; cv.height = r.height*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+addEventListener('resize', resize);
+
+function drawTrack(w,h){
+  const base = h - GROUND_PX;
+  const toX = x => (x - camX)*PXM + w*0.25;
+  const toY = y => base - y*PXM;
+
+  ctx.fillStyle='#0b0f16'; ctx.fillRect(0,0,w,h);
+  // 助跑道
+  ctx.fillStyle='#1a2433';
+  ctx.fillRect(0, base, toX(LINE), h-base);
+  // 沙坑（凹下去 3m）
+  ctx.fillStyle='#2a2114';
+  const px0 = toX(LINE), px1 = toX(PIT_END);
+  ctx.fillRect(px0, base, px1-px0, h-base);
+  ctx.fillStyle='#6b5734';
+  const sandTop = base + PIT_DEPTH*PXM*0.35;      // 画面上稍微压缩坑深，便于构图
+  ctx.fillRect(px0, sandTop, px1-px0, 14);
+  // 起跳板
+  ctx.fillStyle='#e8eef7'; ctx.fillRect(toX(LINE)-5, base-4, 10, 6);
+  ctx.fillStyle='#ffcf4a'; ctx.fillRect(toX(LINE)-2, base-14, 4, 14);
+  // 距离刻度（从起跳线算）
+  ctx.fillStyle='#54657d'; ctx.font='11px sans-serif';
+  for (let m=0; m<=7; m++){
+    const x = toX(LINE+m);
+    if (x<-30 || x>w+30) continue;
+    ctx.fillRect(x, base+12, 1, 5);
+    ctx.fillText(m+'m', x-7, base+28);
+  }
+  // 起跑区
+  ctx.fillStyle='#3a4c63';
+  ctx.fillRect(toX(START_X), base-3, 2, 3);
+  return {toX,toY,base};
+}
+
+function roundRect(x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+
+function box(tf, g, sz, color, radius){
+  const [x,y,a] = tf, [bw,bh] = sz;
+  ctx.save(); ctx.translate(g.toX(x), g.toY(y)); ctx.rotate(-a);
+  ctx.fillStyle=color;
+  if(radius){ roundRect(-bw*PXM/2, -bh*PXM/2, bw*PXM, bh*PXM, radius); ctx.fill(); }
+  else ctx.fillRect(-bw*PXM/2, -bh*PXM/2, bw*PXM, bh*PXM);
+  ctx.restore();
+}
+
+const COL = { torso:'#ffcf4a', head:'#ffe9a8', limb:'#6fc2ff', far:'#3d7fb3' };
+
+function drawBody(f, g){
+  box([f[2],f[3],f[4]], g, S.torso, COL.torso, 6);
+  ctx.fillStyle=COL.head; ctx.beginPath();
+  ctx.arc(g.toX(f[5]), g.toY(f[6]), S.headR*PXM, 0, Math.PI*2); ctx.fill();
+  const parts = [
+    [[7,8,9],S.thigh],[[10,11,12],S.shin],[[13,14,15],S.foot],[[16,17,18],S.arm],[[19,20,21],S.fore],
+    [[22,23,24],S.thigh],[[25,26,27],S.shin],[[28,29,30],S.foot],[[31,32,33],S.arm],[[34,35,36],S.fore]
+  ];
+  parts.forEach(([i0,sz],k)=>{
+    const far = k<5;
+    const color = far ? COL.far : (k===5||k===8 ? COL.torso : COL.limb);
+    box([f[i0[0]],f[i0[1]],f[i0[2]]], g, sz, color, far?0:5);
+  });
+}
+
+function render(){
+  const w = cv.clientWidth, h = cv.clientHeight;
+  if(!trace){ drawTrack(w,h); return; }
+  const f = trace.frames[idx];
+  camX += ((Math.max(f[2], LINE-2) - 3) - camX) * 0.12;
+  const g = drawTrack(w,h);
+  drawBody(f, g);
+  const d = Math.max(0, f[2] - LINE);
+  document.getElementById('dist').textContent = d.toFixed(2);
+  document.getElementById('t').textContent = f[0].toFixed(2)+' s';
+  document.getElementById('best').textContent =
+    (trace.score_m!=null ? '落点 ' + trace.score_m.toFixed(2) + ' m' : '');
+}
+
+function tick(ts){
+  if(playing && trace){
+    const dt=(ts-last)/1000; last=ts;
+    idx += dt*speed*trace.fps;
+    if(idx>=trace.frames.length-1){ idx=trace.frames.length-1; playing=false;
+      document.getElementById('play').textContent='▶ 播放'; }
+    document.getElementById('seek').value=Math.floor(idx);
+  } else last=ts;
+  render(); requestAnimationFrame(tick);
+}
+
+function load(obj, label){
+  trace=obj; idx=0;
+  S = { torso:obj.spec.torso, headR:obj.spec.head_r, thigh:obj.spec.thigh, shin:obj.spec.shin,
+        foot:obj.spec.foot, arm:obj.spec.arm, fore:obj.spec.fore };
+  camX = obj.frames[0][2]-3;
+  document.getElementById('seek').max = obj.frames.length-1;
+  document.getElementById('seek').value = 0;
+  document.getElementById('meta').textContent =
+    `${label||obj.name} · 第 ${obj.attempt} 跳 · ${obj.score_m.toFixed(2)} m` +
+    (obj.foul ? ` · 犯规 ${obj.foul}` : '');
+  document.getElementById('play').textContent='▶ 播放'; playing=false;
+  render();
+}
+
+document.getElementById('play').onclick = e => {
+  if(!trace) return;
+  if(idx>=trace.frames.length-1) idx=0;
+  playing=!playing; last=performance.now();
+  e.target.textContent = playing?'⏸ 暂停':'▶ 播放';
+};
+document.getElementById('seek').oninput = e => { if(trace){ idx=+e.target.value; render(); } };
+document.getElementById('speed').onchange = e => speed=+e.target.value;
+document.getElementById('pick').onchange = async e => {
+  const file=e.target.value; if(!file) return;
+  try { const r=await fetch(file); load(await r.json(), file.replace('.json','')); }
+  catch(err){ alert('读取失败：'+err.message+'\n请用本地 http 服务，或直接拖 JSON 进来。'); }
+};
+
+fetch('index.json').then(r=>r.ok?r.json():null).then(j=>{
+  if(!j) return;
+  const sel=document.getElementById('pick');
+  j.replays.forEach(r=>{
+    const o=document.createElement('option');
+    o.value=r.file; o.textContent=`${r.name} · ${r.score_m.toFixed(2)}m`;
+    sel.appendChild(o);
+  });
+}).catch(()=>{});
+
+const drop=document.getElementById('drop');
+addEventListener('dragover', e=>{ e.preventDefault(); drop.classList.add('over'); });
+addEventListener('dragleave', ()=> drop.classList.remove('over'));
+addEventListener('drop', async e=>{
+  e.preventDefault(); drop.classList.remove('over');
+  const f=e.dataTransfer.files[0]; if(!f) return;
+  load(JSON.parse(await f.text()), f.name);
+});
+
+resize(); requestAnimationFrame(tick);
+</script>
+</body>
+</html>

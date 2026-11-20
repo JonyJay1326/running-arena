@@ -1,0 +1,65 @@
+[
+  {
+    "hole": "01",
+    "file": "01.json",
+    "par": 2,
+    "cap": 6,
+    "terrainHash": "dd2759ed6364decb125b7002c4678f5ff7cddaaacba2aa616008f15349061688"
+  },
+  {
+    "hole": "02",
+    "file": "02.json",
+    "par": 2,
+    "cap": 6,
+    "terrainHash": "2fbdd95dad9fdd78f29971bbc5d4322270a8b78dd44c04157edd07ee0319586e"
+  },
+  {
+    "hole": "03",
+    "file": "03.json",
+    "par": 2,
+    "cap": 6,
+    "terrainHash": "d9a7f82bc7aa3c5da7e3076b6f1084a7df434a5539b38e790adfc20cef29e9bf"
+  },
+  {
+    "hole": "04",
+    "file": "04.json",
+    "par": 3,
+    "cap": 7,
+    "terrainHash": "2fbdd95dad9fdd78f29971bbc5d4322270a8b78dd44c04157edd07ee0319586e"
+  },
+  {
+    "hole": "05",
+    "file": "05.json",
+    "par": 4,
+    "cap": 8,
+    "terrainHash": "2fbdd95dad9fdd78f29971bbc5d4322270a8b78dd44c04157edd07ee0319586e"
+  },
+  {
+    "hole": "06",
+    "file": "06.json",
+    "par": 4,
+    "cap": 8,
+    "terrainHash": "5eb3a530f86974621eaf9a340f0e7ccc422e7adc254112c3a88109b112cf9277"
+  },
+  {
+    "hole": "07",
+    "file": "07.json",
+    "par": 3,
+    "cap": 7,
+    "terrainHash": "4a8fa57ceb8cd2589c1c26d7c6a635cd190e039b2da128b60839028899de2e74"
+  },
+  {
+    "hole": "08",
+    "file": "08.json",
+    "par": 6,
+    "cap": 10,
+    "terrainHash": "1472b0c95ee6fb4b88b117374fc460c62f4bac047517186b58a781754499eb57"
+  },
+  {
+    "hole": "09",
+    "file": "09.json",
+    "par": 5,
+    "cap": 9,
+    "terrainHash": "2c94034ca08e8808f7be1230b00e5bc2c803146eca8f52702436a79c7ff8b420"
+  }
+]

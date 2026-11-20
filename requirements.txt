@@ -1,0 +1,5 @@
+# 第 1、2 期（Python）
+pymunk>=6.0
+
+# 可选：精细渲染成片（第 1 期用，第 2 期只用来混 BGM）
+# pip install pygame-ce

@@ -1,0 +1,84 @@
+{
+  "replays": [
+    {
+      "name": "Astra",
+      "file": "Astra.json",
+      "score_m": 5.187
+    },
+    {
+      "name": "Hy4",
+      "file": "Hy4.json",
+      "score_m": 4.619
+    },
+    {
+      "name": "Sol",
+      "file": "Sol.json",
+      "score_m": 4.465
+    },
+    {
+      "name": "Terra",
+      "file": "Terra.json",
+      "score_m": 4.0
+    },
+    {
+      "name": "Sonnet",
+      "file": "Sonnet.json",
+      "score_m": 3.8
+    },
+    {
+      "name": "Opus",
+      "file": "Opus.json",
+      "score_m": 3.703
+    },
+    {
+      "name": "Grok",
+      "file": "Grok.json",
+      "score_m": 3.266
+    },
+    {
+      "name": "GLM",
+      "file": "GLM.json",
+      "score_m": 2.815
+    },
+    {
+      "name": "DeepSeek",
+      "file": "DeepSeek.json",
+      "score_m": 2.249
+    },
+    {
+      "name": "MiniMax",
+      "file": "MiniMax.json",
+      "score_m": 2.219
+    },
+    {
+      "name": "Doubao",
+      "file": "Doubao.json",
+      "score_m": 1.651
+    },
+    {
+      "name": "Step",
+      "file": "Step.json",
+      "score_m": 1.413
+    },
+    {
+      "name": "Gemini",
+      "file": "Gemini.json",
+      "score_m": 1.179
+    },
+    {
+      "name": "Kimi",
+      "file": "Kimi.json",
+      "score_m": 0.978
+    },
+    {
+      "name": "Qwen",
+      "file": "Qwen.json",
+      "score_m": 0.848
+    },
+    {
+      "name": "MiMo",
+      "file": "MiMo.json",
+      "score_m": 0.068
+    }
+  ]
+}

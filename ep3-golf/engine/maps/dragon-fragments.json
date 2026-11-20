@@ -1,0 +1,612 @@
+{
+  "source": "viewer/assets/video/build-world/forge-mask400.png",
+  "sourceSha256": "6307e91796053b7feb21ab8626a3c093d1a609b57e56d64751357da20ba621e9",
+  "width": 400,
+  "height": 225,
+  "cell": 4,
+  "threshold": {
+    "alphaMin": 128,
+    "luminanceMin": 128,
+    "luminance": "(299r+587g+114b)/1000"
+  },
+  "gridSha256": "d9a7f82bc7aa3c5da7e3076b6f1084a7df434a5539b38e790adfc20cef29e9bf",
+  "solidCells": 42772,
+  "connectivity": 4,
+  "componentCount": 44,
+  "smallFragmentCount": 30,
+  "componentsSizes": [
+    42522,
+    91,
+    33,
+    25,
+    10,
+    8,
+    7,
+    6,
+    6,
+    5,
+    5,
+    4,
+    4,
+    4,
+    3,
+    3,
+    3,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "fragments": [
+    {
+      "size": 2,
+      "gridCells": [
+        [
+          51,
+          161
+        ],
+        [
+          51,
+          162
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          204,
+          644
+        ],
+        [
+          204,
+          648
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          18,
+          162
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          72,
+          648
+        ]
+      ]
+    },
+    {
+      "size": 2,
+      "gridCells": [
+        [
+          391,
+          162
+        ],
+        [
+          391,
+          163
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1564,
+          648
+        ],
+        [
+          1564,
+          652
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          6,
+          163
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          24,
+          652
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          7,
+          164
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          28,
+          656
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          16,
+          164
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          64,
+          656
+        ]
+      ]
+    },
+    {
+      "size": 3,
+      "gridCells": [
+        [
+          394,
+          165
+        ],
+        [
+          394,
+          166
+        ],
+        [
+          395,
+          166
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1576,
+          660
+        ],
+        [
+          1576,
+          664
+        ],
+        [
+          1580,
+          664
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          4,
+          166
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          16,
+          664
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          343,
+          166
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1372,
+          664
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          397,
+          170
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1588,
+          680
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          398,
+          171
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1592,
+          684
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          399,
+          173
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1596,
+          692
+        ]
+      ]
+    },
+    {
+      "size": 2,
+      "gridCells": [
+        [
+          0,
+          177
+        ],
+        [
+          1,
+          177
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          0,
+          708
+        ],
+        [
+          4,
+          708
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          91,
+          178
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          364,
+          712
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          309,
+          179
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1236,
+          716
+        ]
+      ]
+    },
+    {
+      "size": 3,
+      "gridCells": [
+        [
+          95,
+          181
+        ],
+        [
+          96,
+          181
+        ],
+        [
+          97,
+          181
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          380,
+          724
+        ],
+        [
+          384,
+          724
+        ],
+        [
+          388,
+          724
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          296,
+          181
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1184,
+          724
+        ]
+      ]
+    },
+    {
+      "size": 2,
+      "gridCells": [
+        [
+          298,
+          181
+        ],
+        [
+          299,
+          181
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1192,
+          724
+        ],
+        [
+          1196,
+          724
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          306,
+          181
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1224,
+          724
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          313,
+          181
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1252,
+          724
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          103,
+          182
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          412,
+          728
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          297,
+          182
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1188,
+          728
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          300,
+          182
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1200,
+          728
+        ]
+      ]
+    },
+    {
+      "size": 3,
+      "gridCells": [
+        [
+          295,
+          183
+        ],
+        [
+          295,
+          184
+        ],
+        [
+          296,
+          183
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1180,
+          732
+        ],
+        [
+          1180,
+          736
+        ],
+        [
+          1184,
+          732
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          306,
+          184
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          1224,
+          736
+        ]
+      ]
+    },
+    {
+      "size": 2,
+      "gridCells": [
+        [
+          1,
+          191
+        ],
+        [
+          1,
+          192
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          4,
+          764
+        ],
+        [
+          4,
+          768
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          5,
+          195
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          20,
+          780
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          0,
+          204
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          0,
+          816
+        ]
+      ]
+    },
+    {
+      "size": 2,
+      "gridCells": [
+        [
+          60,
+          214
+        ],
+        [
+          61,
+          214
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          240,
+          856
+        ],
+        [
+          244,
+          856
+        ]
+      ]
+    },
+    {
+      "size": 1,
+      "gridCells": [
+        [
+          237,
+          214
+        ]
+      ],
+      "worldTopLeft": [
+        [
+          948,
+          856
+        ]
+      ]
+    }
+  ],
+  "removedFragments": []
+}

@@ -1,0 +1,42 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ep1:
+    name: 第 1 期 · 重跑 22 份 bot 对榜
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pymunk
+      - working-directory: ep1-obstacle
+        run: python verify.py
+
+  ep2:
+    name: 第 2 期 · 重放 78 跳对榜
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pymunk
+      - working-directory: ep2-longjump
+        run: python verify.py
+
+  ep3:
+    name: 第 3 期 · 重算 324 份回放
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - working-directory: ep3-golf
+        run: node verify.mjs

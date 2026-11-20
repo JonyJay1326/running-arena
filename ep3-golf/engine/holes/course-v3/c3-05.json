@@ -1,0 +1,89 @@
+{
+  "id": "c3-05",
+  "map": "claude",
+  "par": 3,
+  "cap": 7,
+  "wind": 3,
+  "goal": "tokens",
+  "tee": {
+    "x0": 130,
+    "x1": 180
+  },
+  "objects": [
+    {
+      "type": "pushToken",
+      "x": 1074,
+      "y": 232
+    },
+    {
+      "type": "chicken",
+      "x": 867,
+      "y": 144
+    }
+  ],
+  "recycle": null,
+  "fly": 0,
+  "name": "星尖弹射",
+  "idea": "只有一个目标：把星尖上的滑板送走。左边是鸡，右边横梁有断口。单发追击保底，掘进削星尖，连发赌滑板的落脚点。",
+  "terrain": [
+    {
+      "op": "carve",
+      "rect": [
+        1180,
+        430,
+        1280,
+        900
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "name": "单发追击",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "single",
+          "dir": 1,
+          "moveX": 155,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "削掉星尖",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "dig",
+          "dir": 1,
+          "moveX": 180,
+          "greedy": true
+        },
+        {
+          "kind": "single",
+          "dir": 1,
+          "moveX": 180,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "连发追落点",
+      "kind": "risky",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 130,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    }
+  ]
+}

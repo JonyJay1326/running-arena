@@ -1,0 +1,107 @@
+{
+  "id": "c4-04",
+  "map": "kimi",
+  "par": 3,
+  "cap": 7,
+  "wind": 3,
+  "goal": "tokens",
+  "tee": {
+    "x0": 290,
+    "x1": 330
+  },
+  "terrain": [
+    {
+      "op": "carve",
+      "rect": [
+        700,
+        680,
+        1080,
+        900
+      ]
+    },
+    {
+      "op": "fill",
+      "rect": [
+        730,
+        636,
+        930,
+        656
+      ]
+    },
+    {
+      "op": "fill",
+      "rect": [
+        1040,
+        760,
+        1160,
+        820
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "type": "pushToken",
+      "x": 820,
+      "y": 636
+    },
+    {
+      "type": "chicken",
+      "x": 1120,
+      "y": 760
+    }
+  ],
+  "recycle": null,
+  "fly": 0,
+  "name": "滑板断桥",
+  "idea": "滑板站在悬空薄桥上，下面是深渊。打身体会把它送向右岸；拆桥让它直接掉下去。鸡守着右岸，不能无脑追着炸。",
+  "routes": [
+    {
+      "name": "单发两次削血",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "single",
+          "dir": 1,
+          "moveX": 310,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "掘进拆桥",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "dig",
+          "dir": 1,
+          "moveX": 310,
+          "greedy": true
+        },
+        {
+          "kind": "single",
+          "dir": 1,
+          "moveX": 310,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "连发追滑板",
+      "kind": "risky",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 330,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    }
+  ]
+}

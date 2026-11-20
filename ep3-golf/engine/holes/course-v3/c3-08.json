@@ -1,0 +1,73 @@
+{
+  "id": "c3-08",
+  "map": "gemini",
+  "par": 4,
+  "cap": 8,
+  "wind": 8,
+  "goal": "tokens",
+  "tee": {
+    "x0": 400,
+    "x1": 440
+  },
+  "objects": [
+    {
+      "type": "bigToken",
+      "x": 1340,
+      "y": 168,
+      "hp": 180
+    },
+    {
+      "type": "chicken",
+      "x": 1400,
+      "y": 248
+    }
+  ],
+  "recycle": null,
+  "fly": 0,
+  "name": "回旋镖·双响",
+  "idea": "保留背身借风，但星顶换成耐久靶。两发回旋镖稳收；连发三颗须穿过同一风层；正面擦星抄近路，偏右会落向鸡。",
+  "routes": [
+    {
+      "name": "背身两次校准",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "single",
+          "dir": -1,
+          "moveX": 420,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "借风连发双响",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": -1,
+          "moveX": 420,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    },
+    {
+      "name": "正面擦星",
+      "kind": "risky",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 440,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    }
+  ]
+}

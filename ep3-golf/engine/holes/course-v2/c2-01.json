@@ -1,0 +1,59 @@
+{
+ "id": "c2-01",
+ "map": "gemini",
+ "par": 2,
+ "cap": 6,
+ "wind": 3,
+ "goal": "tokens",
+ "tee": {
+  "x0": 360,
+  "x1": 440
+ },
+ "objects": [
+  {
+   "type": "token",
+   "x": 850,
+   "y": 840
+  },
+  {
+   "type": "token",
+   "x": 1020,
+   "y": 840
+  }
+ ],
+ "recycle": null,
+ "fly": 0,
+ "name": "开球",
+ "idea": "教学洞：星群下的地面上两颗 token。两发单发稳稳两杆；走到发球台最右边，三叉散射能一发同时罩住两颗。",
+ "routes": [
+  {
+   "name": "两发单发",
+   "kind": "safe",
+   "steps": [
+    {
+     "kind": "single",
+     "greedy": true,
+     "moveX": 400
+    },
+    {
+     "kind": "single",
+     "greedy": true,
+     "moveX": 400
+    }
+   ],
+   "then": "single"
+  },
+  {
+   "name": "走到台边一发三叉",
+   "kind": "clever",
+   "steps": [
+    {
+     "kind": "spread",
+     "greedy": true,
+     "moveX": 430
+    }
+   ],
+   "then": "single"
+  }
+ ]
+}

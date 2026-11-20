@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>第 1 期 · 障碍跑 · 回放</title>
+<style>
+  :root { --bg:#0b0f16; --fg:#e8eef7; --dim:#7b8aa0; --gold:#ffcf4a; --line:#1e2a3a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:14px/1.5 "Microsoft YaHei",system-ui,sans-serif; }
+  header { display:flex; align-items:center; gap:16px; padding:12px 18px; border-bottom:1px solid var(--line); }
+  h1 { font-size:16px; margin:0; letter-spacing:.5px; }
+  h1 small { color:var(--dim); font-weight:400; margin-left:8px; }
+  select, button, input[type=range] { font:inherit; background:#131c28; color:var(--fg);
+    border:1px solid var(--line); border-radius:6px; padding:4px 8px; }
+  button { cursor:pointer; }
+  .spacer { flex:1; }
+  #stage { position:relative; }
+  canvas { display:block; width:100%; height:min(52vh,470px); }
+  .hud { position:absolute; top:14px; left:18px; font-variant-numeric:tabular-nums; }
+  .hud b { font-size:28px; color:var(--gold); }
+  .hud span { color:var(--dim); margin-left:6px; }
+  .bar { display:flex; align-items:center; gap:10px; padding:10px 18px; border-top:1px solid var(--line); }
+  .bar input[type=range] { flex:1; }
+  #drop { padding:10px 18px; color:var(--dim); font-size:12px; }
+  #drop.over { color:var(--gold); }
+  .badge { padding:2px 8px; border:1px solid var(--line); border-radius:999px; color:var(--dim); font-size:12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AI 运动会 · 第 1 期 障碍跑<small>回放（简化渲染，成绩以 results/leaderboard.json 为准）</small></h1>
+  <div class="spacer"></div>
+  <select id="pick"><option value="">选择选手…</option></select>
+  <span class="badge" id="meta">—</span>
+</header>
+
+<div id="stage">
+  <canvas id="cv"></canvas>
+  <div class="hud"><b id="score">0.00</b><span>m</span> <span id="finish"></span></div>
+</div>
+
+<div class="bar">
+  <button id="play">▶ 播放</button>
+  <input id="seek" type="range" min="0" max="0" value="0" step="1">
+  <span id="t" style="color:var(--dim);min-width:64px;text-align:right">0.00 s</span>
+  <select id="speed">
+    <option value="0.25">0.25×</option>
+    <option value="0.5">0.5×</option>
+    <option value="1" selected>1×</option>
+    <option value="2">2×</option>
+  </select>
+</div>
+<div id="drop">把用 <code>python replays/trace.py bots/&lt;选手&gt;/bot.py</code> 导出的 JSON 拖到这里，或
+  用 <code>python -m http.server</code> 起本地服务后从右上角选择（file:// 下浏览器不允许读 index.json）。</div>
+
+<script>
+// ---- 与 engine/physics.py 一致的尺寸（m） ----
+const B = {
+  torso:[0.20,0.60], headR:0.11, thigh:[0.12,0.45], shin:[0.10,0.45],
+  foot:[0.32,0.06], arm:[0.10,0.35], fore:[0.08,0.45]
+};
+const TRACK = {
+  terrain:[[-10,0],[9,0],[11,2*Math.tan(15*Math.PI/180)],[13,0],[118,0]],
+  bumps:[5.5,6.5,7.5,8.5].map(x=>[x,0.08,0.30]),
+  hurdles:[14,15.5,17].map(x=>[x,0.20,0.04]),
+  finish:18
+};
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+const PXM = 120;           // 每米像素
+const GROUND_PX = 92;      // 地面在画布底部上方多少像素
+
+let trace=null, idx=0, playing=false, speed=1, last=0, camX=0;
+
+function resize(){
+  const r = cv.getBoundingClientRect(), dpr = devicePixelRatio||1;
+  cv.width = r.width*dpr; cv.height = r.height*dpr;
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+addEventListener('resize', resize);
+
+function terrainY(x){
+  const t = TRACK.terrain;
+  for(let i=0;i<t.length-1;i++){
+    const [x0,y0]=t[i], [x1,y1]=t[i+1];
+    if(x>=x0 && x<=x1) return y0+(y1-y0)*(x-x0)/(x1-x0||1);
+  }
+  return 0;
+}
+
+function drawTrack(w,h){
+  const base = h - GROUND_PX;
+  // 天空 + 地面
+  const g = ctx.createLinearGradient(0,0,0,base);
+  g.addColorStop(0,'#0b0f16'); g.addColorStop(1,'#121b27');
+  ctx.fillStyle=g; ctx.fillRect(0,0,w,base);
+  ctx.fillStyle='#1a2433'; ctx.fillRect(0,base,w,h-base);
+
+  const toX = x => (x - camX)*PXM + w*0.28;
+  const toY = y => base - y*PXM;
+
+  // 地形
+  ctx.beginPath();
+  ctx.moveTo(toX(-10), toY(terrainY(-10)));
+  for(let x=-10;x<=118;x+=0.25) ctx.lineTo(toX(x), toY(terrainY(x)));
+  ctx.lineTo(toX(118), h); ctx.lineTo(toX(-10), h); ctx.closePath();
+  ctx.fillStyle='#223146'; ctx.fill();
+  ctx.strokeStyle='#3a5372'; ctx.lineWidth=2; ctx.stroke();
+
+  // 减速带
+  for(const [bx,bh,bw] of TRACK.bumps){
+    ctx.fillStyle='#546b88';
+    roundRect(toX(bx-bw/2), toY(bh)-8, bw*PXM, 14, 4); ctx.fill();
+  }
+  // 栏架
+  for(const [hx,hh] of TRACK.hurdles){
+    const x0=toX(hx);
+    ctx.strokeStyle='#8aa4c4'; ctx.lineWidth=3;
+    ctx.beginPath(); ctx.moveTo(x0,toY(0)); ctx.lineTo(x0,toY(hh)); ctx.stroke();
+    ctx.fillStyle='#c9d7e8'; ctx.fillRect(x0-9,toY(hh)-4,18,4);
+  }
+  // 终点线
+  for(let y=0;y<1.6;y+=0.2){
+    ctx.fillStyle = (Math.round(y*5)%2) ? '#e8eef7':'#0b0f16';
+    ctx.fillRect(toX(TRACK.finish)-4, toY(y)-10, 8, 0.2*PXM);
+  }
+  // 距离刻度
+  ctx.fillStyle='#40536b'; ctx.font='11px sans-serif';
+  for(let m=0;m<=18;m+=2){
+    const x=toX(m); if(x<-30||x>w+30) continue;
+    ctx.fillRect(x, toY(0), 1, 6);
+    ctx.fillText(m+'m', x-7, toY(0)+20);
+  }
+  return {toX,toY,base};
+}
+
+function roundRect(x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+
+function box(tf, g, spec, color, radius){
+  const [x,y,a] = tf, [w,h] = spec;
+  const cx = g.toX(x), cy = g.toY(y);
+  ctx.save(); ctx.translate(cx,cy); ctx.rotate(-a);
+  ctx.fillStyle=color;
+  if(radius){ roundRect(-w*PXM/2, -h*PXM/2, w*PXM, h*PXM, radius); ctx.fill(); }
+  else ctx.fillRect(-w*PXM/2, -h*PXM/2, w*PXM, h*PXM);
+  ctx.restore();
+}
+
+const COL = { torso:'#ffcf4a', head:'#ffe9a8', limb:'#6fc2ff', far:'#3d7fb3', foot:'#c9d7e8' };
+
+function drawBody(f, g){
+  const t = f[0], score = f[1];
+  // torso + head
+  box([f[2],f[3],f[4]], g, B.torso, COL.torso, 6);
+  const hx = g.toX(f[5]), hy = g.toY(f[6]);
+  ctx.fillStyle = COL.head; ctx.beginPath();
+  ctx.arc(hx, hy, B.headR*PXM, 0, Math.PI*2); ctx.fill();
+  // 远侧肢体（同色淡化）+ 近侧
+  const parts = [
+    [[7,8,9],B.thigh],[[10,11,12],B.shin],[[13,14,15],B.foot],[[16,17,18],B.arm],[[19,20,21],B.fore],
+    [[22,23,24],B.thigh],[[25,26,27],B.shin],[[28,29,30],B.foot],[[31,32,33],B.arm],[[34,35,36],B.fore]
+  ];
+  parts.forEach(([idxs,spec],i)=>{
+    const tf=[f[idxs[0]],f[idxs[1]],f[idxs[2]]];
+    const far = i<5;
+    box(tf,g,spec, far?COL.far:(i===5?COL.torso:(i===8?COL.torso:COL.limb)), far?0:5);
+  });
+  // 成绩标尺
+  ctx.setLineDash([4,4]); ctx.strokeStyle='rgba(111,194,255,.5)';
+  const sx=g.toX(score);
+  ctx.beginPath(); ctx.moveTo(sx,g.toY(0)); ctx.lineTo(sx,g.toY(2.2)); ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function render(){
+  const w = cv.clientWidth, h = cv.clientHeight;
+  if(trace){
+    const f = trace.frames[idx];
+    camX += ((f[2] - 3) - camX) * 0.15;       // 镜头跟随，留 3m 视野
+    const g2 = drawTrack(w,h);
+    drawBody(f, g2);
+    document.getElementById('score').textContent = f[1].toFixed(2);
+    document.getElementById('t').textContent = f[0].toFixed(2)+' s';
+    const fin = document.getElementById('finish');
+    if(trace.finish_s!=null && f[0] >= trace.finish_s) fin.textContent = 'FINISH ' + trace.finish_s.toFixed(2)+'s';
+    else fin.textContent = '';
+  } else {
+    ctx.fillStyle='#4a5b72'; ctx.font='15px sans-serif';
+    ctx.fillText('还没有载入回放：右上角选择选手，或把 trace JSON 拖进窗口', w*0.12, h/2);
+  }
+}
+
+function tick(ts){
+  if(playing && trace){
+    const dt = (ts-last)/1000; last = ts;
+    idx += dt*speed*trace.fps;
+    if(idx >= trace.frames.length-1){ idx = trace.frames.length-1; playing=false;
+      document.getElementById('play').textContent='▶ 播放'; }
+    document.getElementById('seek').value = Math.floor(idx);
+  } else last = ts;
+  render();
+  requestAnimationFrame(tick);
+}
+
+function load(obj, label){
+  trace = obj; idx = 0; camX = obj.frames[0][2]-3;
+  document.getElementById('seek').max = obj.frames.length-1;
+  document.getElementById('seek').value = 0;
+  document.getElementById('meta').textContent =
+    `${label||obj.name||'trace'} · ${obj.score_m.toFixed(2)} m` +
+    (obj.finish_s!=null ? ` · 冲线 ${obj.finish_s.toFixed(2)}s` : ' · 未冲线');
+  document.getElementById('play').textContent='▶ 播放'; playing=false;
+  render();
+}
+
+document.getElementById('play').onclick = e => {
+  if(!trace) return;
+  if(idx >= trace.frames.length-1) idx = 0;
+  playing = !playing; last = performance.now();
+  e.target.textContent = playing ? '⏸ 暂停' : '▶ 播放';
+};
+document.getElementById('seek').oninput = e => { if(trace){ idx = +e.target.value; render(); } };
+document.getElementById('speed').onchange = e => speed = +e.target.value;
+
+document.getElementById('pick').onchange = async e => {
+  const file = e.target.value; if(!file) return;
+  try {
+    const r = await fetch(file);
+    load(await r.json(), file.replace('.json',''));
+  } catch(err){
+    alert('读取失败：' + err.message + '\n请改用本地 http 服务（python -m http.server），或直接拖 JSON 进来。');
+  }
+};
+
+// 自动列出手边已有的 trace
+fetch('index.json').then(r=>r.ok?r.json():null).then(j=>{
+  if(!j) return;
+  const sel = document.getElementById('pick');
+  j.replays.forEach(r=>{
+    const o=document.createElement('option');
+    o.value=r.file; o.textContent=`${r.name} · ${r.score_m.toFixed(2)}m` + (r.finish_s!=null?` · ${r.finish_s.toFixed(2)}s`:'');
+    sel.appendChild(o);
+  });
+}).catch(()=>{});
+
+// 拖入 JSON
+const drop = document.getElementById('drop');
+addEventListener('dragover', e=>{ e.preventDefault(); drop.classList.add('over'); });
+addEventListener('dragleave', ()=> drop.classList.remove('over'));
+addEventListener('drop', async e=>{
+  e.preventDefault(); drop.classList.remove('over');
+  const f = e.dataTransfer.files[0]; if(!f) return;
+  load(JSON.parse(await f.text()), f.name);
+});
+
+resize(); requestAnimationFrame(tick);
+</script>
+</body>
+</html>
+

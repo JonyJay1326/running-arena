@@ -1,0 +1,5 @@
+{
+  "id": "practice-bug", "map": "flat", "tee": { "x0": 180, "x1": 600 },
+  "wind": -4, "par": 4, "cap": 8, "goal": "bug", "recycle": { "x0": 810, "y0": 700, "x1": 1120, "y1": 890 }, "fly": 1,
+  "objects": [{ "type": "bug", "x": 730, "y": 780 }, { "type": "chicken", "x": 1320, "y": 780 }]
+}

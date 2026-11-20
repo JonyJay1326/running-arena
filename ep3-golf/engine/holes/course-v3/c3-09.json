@@ -1,0 +1,94 @@
+{
+  "id": "c3-09",
+  "map": "dragon-golf",
+  "par": 4,
+  "cap": 8,
+  "wind": 3,
+  "goal": "tokens",
+  "tee": {
+    "x0": 70,
+    "x1": 110
+  },
+  "objects": [
+    {
+      "type": "bigToken",
+      "x": 700,
+      "y": 284,
+      "hp": 180
+    },
+    {
+      "type": "chicken",
+      "x": 770,
+      "y": 184
+    }
+  ],
+  "recycle": null,
+  "fly": 1,
+  "name": "龙眼取珠",
+  "idea": "龙眼井底藏着耐久宝珠，鸡守右眉。先扩左井口再逐发取珠；纸飞机落到左眉换近距离；直接连发吊射争一杆。",
+  "terrain": [
+    {
+      "op": "carve",
+      "rect": [
+        664,
+        170,
+        736,
+        286
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "name": "扩左井口再取珠",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "dig",
+          "dir": 1,
+          "moveX": 90,
+          "aimAt": [
+            670,
+            210
+          ]
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "飞上左眉近投",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "fly",
+          "dir": 1,
+          "moveX": 90,
+          "aimAt": [
+            610,
+            220
+          ]
+        },
+        {
+          "kind": "burst",
+          "dir": 1,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    },
+    {
+      "name": "连发直落龙眼",
+      "kind": "risky",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 110,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    }
+  ]
+}

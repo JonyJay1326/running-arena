@@ -1,0 +1,97 @@
+{
+  "id": "c3-03",
+  "map": "kimi",
+  "par": 3,
+  "cap": 7,
+  "wind": -2,
+  "goal": "bug",
+  "tee": {
+    "x0": 290,
+    "x1": 330
+  },
+  "objects": [
+    {
+      "type": "bug",
+      "x": 640,
+      "y": 820
+    },
+    {
+      "type": "chicken",
+      "x": 1080,
+      "y": 820
+    }
+  ],
+  "recycle": {
+    "x0": 800,
+    "y0": 830,
+    "x1": 1040,
+    "y1": 890
+  },
+  "fly": 0,
+  "name": "月湾接球",
+  "idea": "把虫送进月湾的绿色接球坑。宽坑负责接住落点，鸡守着远岸；推过头会越坑。可先削低近岸，再推入坑，或一发越岸。",
+  "terrain": [
+    {
+      "op": "carve",
+      "rect": [
+        800,
+        800,
+        1040,
+        880
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "name": "先削近岸再推",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "dig",
+          "dir": 1,
+          "moveX": 310,
+          "aimAt": [
+            800,
+            820
+          ]
+        },
+        {
+          "kind": "single",
+          "dir": 1,
+          "moveX": 310,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "借落差直接入坑",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "single",
+          "dir": 1,
+          "moveX": 330,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "连发追推",
+      "kind": "risky",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 290,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    }
+  ]
+}

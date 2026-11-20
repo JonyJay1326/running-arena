@@ -1,0 +1,126 @@
+{
+ "id": "c2-02",
+ "map": "openai",
+ "par": 4,
+ "cap": 8,
+ "wind": 2,
+ "goal": "tokens",
+ "tee": {
+  "x0": 750,
+  "x1": 850,
+  "minFeet": 500
+ },
+ "objects": [
+  {
+   "type": "token",
+   "x": 1222,
+   "y": 564
+  }
+ ],
+ "recycle": null,
+ "fly": 1,
+ "name": "解结",
+ "idea": "token 藏在右边花结的正中心，四面都是缎带。可以一层层挖进去，也可以用三连发沿同一条线打出隧道，或者坐纸飞机飞到右结顶上再往下挖。",
+ "routes": [
+  {
+   "name": "正面横着挖隧道",
+   "kind": "safe",
+   "steps": [
+    {
+     "kind": "dig",
+     "aimAt": [
+      930,
+      540
+     ]
+    },
+    {
+     "kind": "dig",
+     "aimAt": [
+      1010,
+      545
+     ]
+    },
+    {
+     "kind": "dig",
+     "aimAt": [
+      1090,
+      550
+     ]
+    },
+    {
+     "kind": "dig",
+     "aimAt": [
+      1160,
+      555
+     ]
+    }
+   ],
+   "then": "single"
+  },
+  {
+   "name": "挖开口子后三连发钻进去",
+   "kind": "clever",
+   "steps": [
+    {
+     "kind": "dig",
+     "aimAt": [
+      930,
+      540
+     ]
+    },
+    {
+     "kind": "burst",
+     "greedy": true
+    }
+   ],
+   "then": "burst"
+  },
+  {
+   "name": "纸飞机空降，原地往下挖",
+   "kind": "clever",
+   "steps": [
+    {
+     "kind": "fly",
+     "aimAt": [
+      1222,
+      172
+     ]
+    },
+    {
+     "kind": "dig",
+     "aimAt": [
+      1222,
+      230
+     ]
+    },
+    {
+     "kind": "dig",
+     "aimAt": [
+      1222,
+      330
+     ]
+    },
+    {
+     "kind": "dig",
+     "aimAt": [
+      1222,
+      430
+     ]
+    }
+   ],
+   "then": "single"
+  }
+ ],
+ "terrain": [
+  {
+   "op": "fill",
+   "rect": [
+    728,
+    560,
+    872,
+    592
+   ],
+   "note": "两结之间的小平台（发球台）"
+  }
+ ]
+}

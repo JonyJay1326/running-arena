@@ -1,0 +1,115 @@
+{
+  "id": "c3-02",
+  "map": "openai",
+  "par": 2,
+  "cap": 6,
+  "wind": 2,
+  "goal": "tokens",
+  "tee": {
+    "x0": 750,
+    "x1": 850,
+    "minFeet": 500
+  },
+  "objects": [
+    {
+      "type": "bigToken",
+      "x": 1222,
+      "y": 560,
+      "hp": 180
+    }
+  ],
+  "recycle": null,
+  "fly": 0,
+  "name": "拆礼盒",
+  "idea": "右花结开成礼盒：侧面宽窗口，顶上直烟囱。两发单发沿侧窗拆包装；三连发一次打够伤害；高抛从顶部投递。",
+  "routes": [
+    {
+      "name": "侧窗两次直击",
+      "kind": "safe",
+      "steps": [
+        {
+          "kind": "single",
+          "moveX": 800,
+          "dir": 1,
+          "aimAt": [
+            1200,
+            530
+          ],
+          "angles": [
+            0,
+            25
+          ]
+        },
+        {
+          "kind": "single",
+          "moveX": 800,
+          "dir": 1,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "single"
+    },
+    {
+      "name": "侧窗连发拆盒",
+      "kind": "clever",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 800,
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    },
+    {
+      "name": "烟囱顶部投递",
+      "kind": "risky",
+      "steps": [
+        {
+          "kind": "burst",
+          "dir": 1,
+          "moveX": 750,
+          "angles": [
+            65,
+            85
+          ],
+          "greedy": true,
+          "repeat": true
+        }
+      ],
+      "then": "burst"
+    }
+  ],
+  "terrain": [
+    {
+      "op": "fill",
+      "rect": [
+        728,
+        560,
+        872,
+        592
+      ]
+    },
+    {
+      "op": "carve",
+      "rect": [
+        880,
+        470,
+        1300,
+        560
+      ]
+    },
+    {
+      "op": "carve",
+      "rect": [
+        1080,
+        140,
+        1268,
+        560
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+ "id": "c1-09",
+ "map": "dragon-golf",
+ "par": 3,
+ "cap": 7,
+ "wind": 3,
+ "goal": "tokens",
+ "tee": {
+  "x0": 70,
+  "x1": 110
+ },
+ "objects": [
+  {
+   "type": "token",
+   "x": 700,
+   "y": 240
+  },
+  {
+   "type": "token",
+   "x": 900,
+   "y": 240
+  }
+ ],
+ "recycle": null,
+ "fly": 0,
+ "name": "点睛",
+ "idea": "Astra 的世界。两颗 token 嵌在龙头两只眼窝里，都打中，龙眼亮起。"
+}

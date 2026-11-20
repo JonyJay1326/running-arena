@@ -1,0 +1,100 @@
+{
+  "replays": [
+    {
+      "name": "Astra",
+      "file": "Astra.json",
+      "score_m": 18.869,
+      "finish_s": 11.55
+    },
+    {
+      "name": "DeepSeek",
+      "file": "DeepSeek.json",
+      "score_m": 9.101,
+      "finish_s": null
+    },
+    {
+      "name": "GLM",
+      "file": "GLM.json",
+      "score_m": 2.264,
+      "finish_s": null
+    },
+    {
+      "name": "Gemini",
+      "file": "Gemini.json",
+      "score_m": 9.87,
+      "finish_s": null
+    },
+    {
+      "name": "Grok",
+      "file": "Grok.json",
+      "score_m": 6.119,
+      "finish_s": null
+    },
+    {
+      "name": "Hy4",
+      "file": "Hy4.json",
+      "score_m": 5.567,
+      "finish_s": null
+    },
+    {
+      "name": "Kimi",
+      "file": "Kimi.json",
+      "score_m": 18.016,
+      "finish_s": 17.416667
+    },
+    {
+      "name": "MiMo",
+      "file": "MiMo.json",
+      "score_m": 1.656,
+      "finish_s": null
+    },
+    {
+      "name": "MiniMax",
+      "file": "MiniMax.json",
+      "score_m": 0.113,
+      "finish_s": null
+    },
+    {
+      "name": "Opus",
+      "file": "Opus.json",
+      "score_m": 19.135,
+      "finish_s": 17.1
+    },
+    {
+      "name": "Qwen",
+      "file": "Qwen.json",
+      "score_m": 10.388,
+      "finish_s": null
+    },
+    {
+      "name": "Sol",
+      "file": "Sol.json",
+      "score_m": 15.048,
+      "finish_s": null
+    },
+    {
+      "name": "Sonnet",
+      "file": "Sonnet.json",
+      "score_m": 18.011,
+      "finish_s": 30.0
+    },
+    {
+      "name": "Step",
+      "file": "Step.json",
+      "score_m": 1.638,
+      "finish_s": null
+    },
+    {
+      "name": "Terra",
+      "file": "Terra.json",
+      "score_m": 18.214,
+      "finish_s": 27.433333
+    },
+    {
+      "name": "豆包",
+      "file": "豆包.json",
+      "score_m": 4.873,
+      "finish_s": null
+    }
+  ]
+}

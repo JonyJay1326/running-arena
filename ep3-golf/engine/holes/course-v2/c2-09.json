@@ -1,0 +1,78 @@
+{
+ "id": "c2-09",
+ "map": "dragon-golf",
+ "par": 2,
+ "cap": 6,
+ "wind": 3,
+ "goal": "tokens",
+ "tee": {
+  "x0": 70,
+  "x1": 110
+ },
+ "objects": [
+  {
+   "type": "token",
+   "x": 700,
+   "y": 284
+  },
+  {
+   "type": "chicken",
+   "x": 750,
+   "y": 208
+  }
+ ],
+ "recycle": null,
+ "fly": 0,
+ "name": "点睛",
+ "idea": "Astra 的龙首。左眼窝是一口窄深井，token 沉在井底；尖叫鸡就蹲在井口右边。精准吊射直落井底最快；三连发多给两次机会；也可以先用掘进弹把井口炸宽，但离鸡太近。",
+ "terrain": [
+  {
+   "op": "carve",
+   "rect": [
+    680,
+    170,
+    720,
+    286
+   ],
+   "note": "左眼窝挖成一口窄深井"
+  }
+ ],
+ "routes": [
+  {
+   "name": "单发精准吊射",
+   "kind": "risky",
+   "steps": [
+    {
+     "kind": "single",
+     "greedy": true
+    }
+   ],
+   "then": "single"
+  },
+  {
+   "name": "三连发吊射",
+   "kind": "clever",
+   "steps": [
+    {
+     "kind": "burst",
+     "greedy": true
+    }
+   ],
+   "then": "burst"
+  },
+  {
+   "name": "先炸宽井口再打",
+   "kind": "safe",
+   "steps": [
+    {
+     "kind": "dig",
+     "aimAt": [
+      690,
+      200
+     ]
+    }
+   ],
+   "then": "single"
+  }
+ ]
+}

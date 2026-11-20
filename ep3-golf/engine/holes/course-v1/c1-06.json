@@ -1,0 +1,29 @@
+{
+ "id": "c1-06",
+ "map": "doubao",
+ "par": 4,
+ "cap": 8,
+ "wind": 2,
+ "goal": "tokens",
+ "tee": {
+  "x0": 380,
+  "x1": 420,
+  "minFeet": 700
+ },
+ "objects": [
+  {
+   "type": "bigToken",
+   "x": 1200,
+   "y": 760
+  },
+  {
+   "type": "chicken",
+   "x": 782,
+   "y": 800
+  }
+ ],
+ "recycle": null,
+ "fly": 0,
+ "name": "凿墙",
+ "idea": "关在左屋里，屋顶挡住高抛。用三连发/掘进弹凿穿两道墙，再平射右屋里的大 token。洼地里有尖叫鸡。"
+}
