@@ -100,6 +100,29 @@ def page(title, body, active, base, description):
 
 
 def main():
+    # 第 3 期的原始记录是「工具 + 模型 id + 强度」，这里整理成可读的全名；
+    # 原始字符串仍保留在 results/standings.json 与 docs/models.md 里。
+    EP3_MODEL = {
+        "sol": "Codex CLI · GPT-6.2 Sol · High",
+        "fable": "Claude Code · Claude Fable 5.2 · High",
+        "carbon": "OpenCode · Gemini 4 Carbon · High",
+        "hydrogen": "OpenCode · Gemini 4 Hydrogen · High",
+        "astra": "Codex · GPT-6 Astra · High",
+        "opus": "Claude Code · Claude Opus 5.5 · High",
+        "terra": "Codex · GPT-6.1 Terra · High",
+        "grok": "Grok CLI · Grok 4.7 Fast · High",
+        "sonnet": "Claude Code · Claude Sonnet 5.5 · High",
+        "glm": "ZCode · GLM-5.3 · High",
+        "qwen": "Qoder CLI · Qwen4-Max-Preview · High",
+        "kimi": "OpenCode · Kimi K3.1 Pro · High",
+        "minimax": "CodeBuddy · MiniMax-M3.1-Flash · High",
+        "hy4": "CodeBuddy · Hy4 · High",
+        "doubao": "OpenCode · 豆包 Seed Evolving · High",
+        "mimo": "CodeBuddy · MiMo-V2.6-Pro · High",
+        "step5": "CodeBuddy · Step-5-Preview · High",
+        "deepseek": "DeepSeek Harness · 模型未记录",
+    }
+
     if os.path.isdir(DIST):
         shutil.rmtree(DIST)
     os.makedirs(DIST)
@@ -387,7 +410,7 @@ python challenge.py my_bot.py</pre>
     # ---- 第 3 期 ----
     standings = [
         [medal(r["rank"]), f'<span class="who-cell">{r["display"]}</span>',
-         f'<span class="sub">{r.get("model") or "未记录"}</span>',
+         f'<span class="sub">{EP3_MODEL.get(r["name"]) or r.get("model") or "未记录"}</span>',
          r["rounds"].get("r1", {}).get("total", "–"),
          r["rounds"].get("r2", {}).get("total", "–"),
          f'<b>{r["total"]}</b>', r.get("completed", "–")]
@@ -428,7 +451,7 @@ python challenge.py my_bot.py</pre>
 <section>
   <h2 style="margin-bottom:10px">18 人总杆</h2>
   <p class="muted small" style="margin-bottom:22px">完成的洞记实际杆数（最多 par+3），没打进记 par+4；同杆比完成洞数。点上面的回放入口可以逐回合看。</p>
-  {table(["#", "选手", "模型（记录）", "第 1 轮", "第 2 轮", "总杆", "完成洞"], standings, 3)}
+  {table(["#", "选手", "模型", "第 1 轮", "第 2 轮", "总杆", "完成洞"], standings, 3)}
 </section>
 
 <section>
@@ -452,3 +475,4 @@ node verify.mjs --player sol --round 1</pre>
 
 if __name__ == "__main__":
     main()
+
