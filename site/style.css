@@ -207,6 +207,7 @@ td.n, th.n { text-align: right; font-family: var(--mono); font-variant-numeric: 
 .medal.g3 { background: rgba(201,139,94,.16); color: var(--bronze); }
 .who-cell { font-weight: 600; letter-spacing: -0.01em; }
 .sub { color: var(--muted); font-size: 12.5px; }
+.model { color: var(--text-soft); font-size: 12.8px; letter-spacing: 0; }
 
 /* ---------- 单期页头 ---------- */
 .ep-hero {
@@ -297,6 +298,7 @@ footer a:hover { color: var(--accent); }
   .ep .who { grid-column: 2; }
   h1 { font-size: clamp(2.1rem, 9vw, 2.8rem); }
 }
+
 
 
 

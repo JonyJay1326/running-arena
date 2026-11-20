@@ -410,7 +410,7 @@ python challenge.py my_bot.py</pre>
     # ---- 第 3 期 ----
     standings = [
         [medal(r["rank"]), f'<span class="who-cell">{r["display"]}</span>',
-         f'<span class="sub">{EP3_MODEL.get(r["name"]) or r.get("model") or "未记录"}</span>',
+         f'<span class="model">{EP3_MODEL.get(r["name"]) or r.get("model") or "未记录"}</span>',
          r["rounds"].get("r1", {}).get("total", "–"),
          r["rounds"].get("r2", {}).get("total", "–"),
          f'<b>{r["total"]}</b>', r.get("completed", "–")]
@@ -475,5 +475,6 @@ node verify.mjs --player sol --round 1</pre>
 
 if __name__ == "__main__":
     main()
+
 
 
