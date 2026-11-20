@@ -37,6 +37,14 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+/* 极轻的顶部光晕，给纯黑加一点纵深，不抢内容 */
+body::before {
+  content: ""; position: fixed; left: 50%; top: -320px; width: 900px; height: 620px;
+  transform: translateX(-50%);
+  background: radial-gradient(closest-side, rgba(240, 180, 41, 0.09), transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+main, header.top, footer { position: relative; z-index: 1; }
 
 a { color: inherit; text-decoration: none; }
 a:hover { color: var(--accent); }
@@ -131,14 +139,14 @@ p { margin: 0; }
 .board .head b { font-size: 13px; color: var(--accent); font-weight: 600; letter-spacing: .04em; }
 .board ol { list-style: none; margin: 0; padding: 0; }
 .board li {
-  display: grid; grid-template-columns: 30px 1fr auto auto; gap: 12px;
+  display: grid; grid-template-columns: 28px minmax(0,1fr) auto 3.4em; gap: 14px;
   align-items: center; padding: 11px 0; border-top: 1px solid var(--line);
   font-size: 14.5px;
 }
 .board li:first-child { border-top: 0; }
 .board .rk { color: var(--muted); font-family: var(--mono); font-size: 12.5px; }
 .board .pts { font-family: var(--mono); color: var(--text); text-align: right; min-width: 2.2em; }
-.board .brk { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.board .brk { font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: right; }
 
 /* ---------- 数字条 ---------- */
 .stats {
@@ -289,6 +297,7 @@ footer a:hover { color: var(--accent); }
   .ep .who { grid-column: 2; }
   h1 { font-size: clamp(2.1rem, 9vw, 2.8rem); }
 }
+
 
 
 
