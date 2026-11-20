@@ -61,7 +61,7 @@
 | Sonnet | Claude Code claude-sonnet-5-5 high |
 | GLM | ZCode GLM-5.3 High |
 | Qwen | Qoder CLI CN Qwen4-Max-Preview High |
-| DeepSeek | 未记录 |
+| DeepSeek | DeepSeek Harness · DeepSeek V4.1 Flash · Max |
 | Kimi | OpenCode Volcano Engine (Agent Plan) Kimi K3.1 Pro High |
 | MiniMax | CodeBuddy minimax-m3.1-flash high |
 | Hy4 | CodeBuddy hy4free high |

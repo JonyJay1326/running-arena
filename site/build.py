@@ -120,7 +120,7 @@ def main():
         "doubao": "OpenCode · 豆包 Seed Evolving · High",
         "mimo": "CodeBuddy · MiMo-V2.6-Pro · High",
         "step5": "CodeBuddy · Step-5-Preview · High",
-        "deepseek": "DeepSeek Harness · 模型未记录",
+        "deepseek": "DeepSeek Harness · DeepSeek V4.1 Flash · Max",
     }
 
     if os.path.isdir(DIST):
